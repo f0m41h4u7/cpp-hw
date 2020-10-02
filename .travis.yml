@@ -10,13 +10,14 @@ before_script:
 - sudo apt-get update -qq
 
 script:
-- cmake .
-- cmake --build .
-- cmake --build . --target test
-- cmake --build . --target package
+- cmake ${BRANCH}
+- cmake --build ${BRANCH}
+- cmake --build ${BRANCH} --target test
+- cmake --build $(BRANCH) --target package
 
 deploy:
   provider: script
   skip_cleanup: true
   script:
   - curl -T ${BRANCH}-0.0.$TRAVIS_BUILD_NUMBER.deb -uf0m41h4u7:$BINTRAY_API_KEY "https://api.bintray.com/content/f0m41h4u7/cpp-hw/${BRANCH}/$TRAVIS_BUILD_NUMBER/${BRANCH}-0.0.$TRAVIS_BUILD_NUMBER.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+  if: branch != master
