@@ -14,10 +14,13 @@ script:
 - cmake --build . --target package
 
 deploy:
-  provider: bintray
-  file: $TRAVIS_BRANCH/$TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER.deb
-  user: f0m41h4u7
-  key: $BINTRAY_API_KEY
-  skip_cleanup: true
-  on:
-    all_branches: true
+  - provider: script
+    on:
+      all_branches: true
+  - provider: bintray
+    file: $TRAVIS_BRANCH/$TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER.deb
+    user: f0m41h4u7
+    key: $BINTRAY_API_KEY
+    skip_cleanup: true
+    on:
+      all_branches: true
