@@ -15,7 +15,7 @@ script:
 
 deploy:
   provider: bintray
-  file: $TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER.deb
+  file: $TRAVIS_BRANCH/$TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER.deb
   user: f0m41h4u7
   key: $BINTRAY_API_KEY
   skip_cleanup: true
