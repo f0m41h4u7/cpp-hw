@@ -1,15 +1,13 @@
 language: cpp
 
-env:
-  global:
-    - BRANCH="${TRAVIS_BRANCH}"
-
 before_script:
+- if [ "$TRAVIS_BRANCH" == "master" ]; then travis_terminate 0; fi
 - sudo apt-get install libboost-test-dev -y
 - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
 - sudo apt-get update -qq
 
 script:
+- cd $TRAVIS_BRANCH
 - cmake .
 - cmake --build .
 - cmake --build . --target test
@@ -19,4 +17,4 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-  - curl -T ${BRANCH}-0.0.$TRAVIS_BUILD_NUMBER.deb -uf0m41h4u7:$BINTRAY_API_KEY "https://api.bintray.com/content/f0m41h4u7/cpp-hw/${BRANCH}/$TRAVIS_BUILD_NUMBER/${BRANCH}-0.0.$TRAVIS_BUILD_NUMBER.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+  - curl -T $TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER.deb -uf0m41h4u7:$BINTRAY_API_KEY "https://api.bintray.com/content/f0m41h4u7/cpp-hw/$TRAVIS_BRANCH/$TRAVIS_BUILD_NUMBER/$TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
