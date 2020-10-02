@@ -1,12 +1,12 @@
 language: cpp
 
 before_script:
+- if [ "$TRAVIS_BRANCH" == "master" ]; then travis_terminate 0; fi
 - sudo apt-get install libboost-test-dev -y
 - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
 - sudo apt-get update -qq
 
 script:
-- if [ "$TRAVIS_BRANCH" == "master" ]; then travis_terminate 0; fi
 - cd $TRAVIS_BRANCH
 - cmake .
 - cmake --build .
