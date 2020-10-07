@@ -6,17 +6,38 @@ before_script:
 - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
 - sudo apt-get update -qq
 
-script:
-- cd $TRAVIS_BRANCH
-- cmake .
-- cmake --build .
-- cmake --build . --target test
-- cmake --build . --target package
+stages:
+  - name: Build
+  - name: Test
+  - name: Deploy
 
-deploy:
-  provider: script
-  skip_cleanup: true
-  script:
-  - curl -T $TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -uf0m41h4u7:$BINTRAY_API_KEY "https://api.bintray.com/content/f0m41h4u7/cpp-hw/$TRAVIS_BRANCH/$TRAVIS_BUILD_NUMBER/$TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
-  on:
-    all_branches: true
+jobs:
+  include:
+    - stage: "Build"
+      name: "build"
+      script:
+        - cd $TRAVIS_BRANCH
+        - cmake .
+        - cmake --build .
+        - cmake --build . --target package
+    - stage: "Test"
+      name: "unit tests"
+      script:
+        - cd $TRAVIS_BRANCH
+        - cmake .
+        - cmake --build . --target test
+        - ./test
+    - stage: "Deploy"
+      name: "deploy"
+      script:
+        - cd $TRAVIS_BRANCH
+        - cmake .
+        - cmake --build . --target package
+      deploy:
+        provider: bintray
+        file: $TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb
+        user: f0m41h4u7
+        key: $BINTRAY_API_KEY
+        skip_cleanup: true
+        on:
+          all_branches: true
