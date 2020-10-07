@@ -1,8 +1,16 @@
 language: cpp
+compiler: gcc
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-9
+      - g++-9
+      - libboost-test-dev
 
 install:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then travis_terminate 0; fi
-- sudo apt-get install libboost-test-dev g++-6 -y
 - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
 - sudo apt-get update -qq
 
