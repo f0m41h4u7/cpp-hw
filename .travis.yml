@@ -2,9 +2,10 @@ language: cpp
 
 before_script:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then travis_terminate 0; fi
-- sudo apt-get install libboost-test-dev -y
+- sudo apt-get install libboost-test-dev g++-6 -y
 - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
 - sudo apt-get update -qq
+- sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
 
 stages:
   - name: Build
