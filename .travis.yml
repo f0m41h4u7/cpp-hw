@@ -1,24 +1,17 @@
 language: cpp
 
-before_script:
+install:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then travis_terminate 0; fi
 - sudo apt-get install libboost-test-dev g++-6 -y
 - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
 - sudo apt-get update -qq
 
 stages:
-  - name: Build
   - name: Test
   - name: Deploy
 
 jobs:
   include:
-    - stage: "Build"
-      name: "build"
-      script:
-        - cd $TRAVIS_BRANCH
-        - cmake .
-        - make package
     - stage: "Test"
       name: "unit tests"
       script:
@@ -31,7 +24,8 @@ jobs:
       script:
         - cd $TRAVIS_BRANCH
         - cmake .
-        - make package
+        - cmake --build .
+        - cmake --build . --target package
       deploy:
         provider: bintray
         file: $TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb
