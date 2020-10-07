@@ -18,21 +18,20 @@ jobs:
       script:
         - cd $TRAVIS_BRANCH
         - cmake .
-        - cmake --build .
-        - cmake --build . --target package
+        - make package
     - stage: "Test"
       name: "unit tests"
       script:
         - cd $TRAVIS_BRANCH
         - cmake .
-        - cmake --build . --target test
+        - make test
         - ./test
     - stage: "Deploy"
       name: "deploy"
       script:
         - cd $TRAVIS_BRANCH
         - cmake .
-        - cmake --build . --target package
+        - make package
       deploy:
         provider: bintray
         file: $TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb
