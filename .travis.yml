@@ -1,22 +1,41 @@
 language: cpp
+compiler: gcc
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-9
+      - g++-9
+      - libboost-test-dev
 
-before_script:
+install:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then travis_terminate 0; fi
-- sudo apt-get install libboost-test-dev -y
 - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
 - sudo apt-get update -qq
+- sudo ln -s /usr/bin/gcc-9 /usr/local/bin/gcc
+- sudo ln -s /usr/bin/g++-9 /usr/local/bin/g++
+- export CC=/usr/bin/gcc-9
+- export CXX=/usr/bin/g++-9
 
-script:
-- cd $TRAVIS_BRANCH
-- cmake .
-- cmake --build .
-- cmake --build . --target test
-- cmake --build . --target package
+stages:
+  - name: Test
+  - name: Deploy
 
-deploy:
-  provider: script
-  skip_cleanup: true
-  script:
-  - curl -T $TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -uf0m41h4u7:$BINTRAY_API_KEY "https://api.bintray.com/content/f0m41h4u7/cpp-hw/$TRAVIS_BRANCH/$TRAVIS_BUILD_NUMBER/$TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
-  on:
-    all_branches: true
+jobs:
+  include:
+    - stage: "Test"
+      name: "unit tests"
+      script:
+        - cd $TRAVIS_BRANCH
+        - cmake .
+        - make test
+        - ./test
+    - stage: "Deploy"
+      name: "deploy"
+      script:
+        - cd $TRAVIS_BRANCH
+        - cmake .
+        - cmake --build .
+        - cmake --build . --target package
+        - curl -T $TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -uf0m41h4u7:$BINTRAY_API_KEY "https://api.bintray.com/content/f0m41h4u7/cpp-hw/$TRAVIS_BRANCH/$TRAVIS_BUILD_NUMBER/$TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
