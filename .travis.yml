@@ -13,6 +13,10 @@ install:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then travis_terminate 0; fi
 - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
 - sudo apt-get update -qq
+- ln -s /usr/bin/gcc-9 /usr/local/bin/gcc
+- ln -s /usr/bin/g++-9 /usr/local/bin/g++
+- export CC=/usr/bin/gcc-9
+- export CXX=/usr/bin/g++-9
 
 stages:
   - name: Test
