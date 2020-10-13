@@ -19,7 +19,7 @@ struct IP_filter
 
 private:
   std::multiset<uint32_t> m_IP_addrs;
-  char               m_IP_str[INET_ADDRSTRLEN];
-  uint32_t           m_tmp;
-  std::cmatch        m_match;
+  char                    m_IP_str[INET_ADDRSTRLEN];
+  uint32_t                m_tmp;
+  std::cmatch             m_match;
 };

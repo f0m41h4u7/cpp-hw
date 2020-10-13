@@ -71,5 +71,4 @@ BOOST_AUTO_TEST_CASE(test_print_match)
   BOOST_CHECK(strCout.str() == "1.234.123.11\n1.45.13.23\n46.70.123.21\n46.70.123.21\n3.46.123.21\n");
 }
 
-
 }
