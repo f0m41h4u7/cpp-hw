@@ -24,16 +24,45 @@ void IP_filter::printReverse()
   }
 }
 
-void IP_filter::printMatchRegex(std::string_view reg_sv)
+void IP_filter::printOneInFirstByte()
 {
-  std::regex reg(reg_sv.data());
   for(auto ip = m_IP_addrs.rbegin(); ip != m_IP_addrs.rend(); ++ip)
   {
     m_tmp = htonl(*ip);
-    inet_ntop(AF_INET, &m_tmp, m_IP_str, INET_ADDRSTRLEN);
-    if (std::regex_match (m_IP_str, m_match, reg))
+    if ( (m_tmp & 0xff) == 1)
     {
+      inet_ntop(AF_INET, &m_tmp, m_IP_str, INET_ADDRSTRLEN);
       std::cout << m_IP_str << "\n";
-    }    
+    }
+  }
+}
+
+void IP_filter::print46And70Bytes()
+{
+  for(auto ip = m_IP_addrs.rbegin(); ip != m_IP_addrs.rend(); ++ip)
+  {
+    m_tmp = htonl(*ip);
+    if ( ((m_tmp & 0xff) == 46) && (((m_tmp >> 8) & 0xff) == 70) )
+    {
+      inet_ntop(AF_INET, &m_tmp, m_IP_str, INET_ADDRSTRLEN);
+      std::cout << m_IP_str << "\n";
+    }
+  }
+}
+
+void IP_filter::print46InAnyByte()
+{
+  for(auto ip = m_IP_addrs.rbegin(); ip != m_IP_addrs.rend(); ++ip)
+  {
+    m_tmp = htonl(*ip);
+    for(auto i = 0; i < 4; ++i)
+    {
+      if ( ((m_tmp >> (8*i)) & 0xff) == 46 )
+      {
+        inet_ntop(AF_INET, &m_tmp, m_IP_str, INET_ADDRSTRLEN);
+        std::cout << m_IP_str << "\n";
+        break;
+      }
+    }
   }
 }

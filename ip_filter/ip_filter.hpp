@@ -13,7 +13,9 @@ struct IP_filter
 
   uint32_t parseIP(std::string_view);
   void printReverse();
-  void printMatchRegex(std::string_view);
+  void printOneInFirstByte();
+  void print46And70Bytes();
+  void print46InAnyByte();
 
 private:
   std::multiset<uint32_t> m_IP_addrs;

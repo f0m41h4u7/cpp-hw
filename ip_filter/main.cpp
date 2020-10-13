@@ -25,13 +25,13 @@ int main()
   f.printReverse();
 
   // print IPs with 1 in first byte
-  f.printMatchRegex("1\\.((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){2}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"sv);
+  f.printOneInFirstByte();
 
   // print IPs with 46 in first byte and 70 in second byte
-  f.printMatchRegex("46\\.70\\.((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.)(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"sv);
+  f.print46And70Bytes();
 
   // print IPs with 46 in any byte
-  f.printMatchRegex("(?=[^12]*46.*)(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"sv);
+  f.print46InAnyByte();
 
   return 0;
 }
