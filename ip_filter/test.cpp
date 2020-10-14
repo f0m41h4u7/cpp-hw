@@ -63,15 +63,9 @@ BOOST_AUTO_TEST_CASE(test_print_match)
   std::ostringstream strCout;
 
   std::cout.rdbuf(strCout.rdbuf());
-<<<<<<< HEAD
   f.printOneInFirstByte();
   f.print46And70Bytes();
   f.print46InAnyByte();
-=======
-  f.printMatchRegex("1\\.((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){2}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"sv);
-  f.printMatchRegex("46\\.70\\.((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.)(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"sv);
-  f.printMatchRegex("(?=[^12]*46.*)(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"sv);
->>>>>>> 50bfb0b... finish hw 0.2
   std::cout.rdbuf(coutBuf);
 
   BOOST_CHECK(strCout.str() == "1.234.123.11\n1.45.13.23\n46.70.123.21\n46.70.123.21\n3.46.123.21\n");
