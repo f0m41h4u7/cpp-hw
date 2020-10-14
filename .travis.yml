@@ -28,13 +28,13 @@ jobs:
       name: "unit tests"
       script:
         - cd $TRAVIS_BRANCH
-        - chmod +x build
-        - ./build test
+        - chmod +x build.sh
+        - ./build.sh test
         - ./test
     - stage: "Deploy"
       name: "deploy"
       script:
         - cd $TRAVIS_BRANCH
-        - chmod +x build
-        - ./build deb
+        - chmod +x build.sh
+        - ./build.sh deb
         - curl -T $TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -uf0m41h4u7:$BINTRAY_API_KEY "https://api.bintray.com/content/f0m41h4u7/cpp-hw/$TRAVIS_BRANCH/$TRAVIS_BUILD_NUMBER/$TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
