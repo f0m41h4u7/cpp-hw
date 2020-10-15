@@ -1,4 +1,11 @@
+#pragma once
+
+#ifdef _WIN32
+#include <winsock.h>
+#else
 #include <arpa/inet.h>
+#endif
+
 #include <regex>
 #include <set>
 #include <string_view>
@@ -9,9 +16,7 @@ struct IP_filter
 {
   IP_filter() {}
 
-  void appendIP(uint32_t ip) { m_IP_addrs.insert(ip); }
-
-  uint32_t parseIP(std::string_view);
+  int append(std::string_view);
   void printReverse();
   void printOneInFirstByte();
   void print46And70Bytes();
@@ -20,6 +25,4 @@ struct IP_filter
 private:
   std::multiset<uint32_t> m_IP_addrs;
   char                    m_IP_str[INET_ADDRSTRLEN];
-  uint32_t                m_tmp;
-  std::cmatch             m_match;
 };

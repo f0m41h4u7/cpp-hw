@@ -8,17 +8,14 @@ int main()
 
   std::string read_line;
   IP_filter f;
-  uint32_t tmp;
 
   while (std::getline(std::cin, read_line))
   {
-    tmp = f.parseIP(std::string_view{read_line});
-    if (tmp == 0)
+    if (!f.append(std::string_view{read_line}))
     {
       std::cout << "failed to convert IPv4 address from line: \"" << read_line << "\"\n";
       return 1;
     }
-    f.appendIP(tmp);
   }
   
   // print reverse-sorted
