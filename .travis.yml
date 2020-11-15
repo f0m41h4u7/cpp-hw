@@ -31,6 +31,8 @@ jobs:
         - chmod +x build.sh
         - ./build.sh test
         - ./test
+      if: |
+        (branch != allocator) 
     - stage: "Deploy"
       name: "deploy"
       script:
