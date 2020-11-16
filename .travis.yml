@@ -1,22 +1,7 @@
 language: cpp
-compiler: gcc
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - gcc-9
-      - g++-9
-      - libboost-test-dev
 
 install:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then travis_terminate 0; fi
-- echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
-- sudo apt-get update -qq
-- sudo ln -s /usr/bin/gcc-9 /usr/local/bin/gcc
-- sudo ln -s /usr/bin/g++-9 /usr/local/bin/g++
-- export CC=/usr/bin/gcc-9
-- export CXX=/usr/bin/g++-9
 
 stages:
   - name: Test
@@ -27,14 +12,13 @@ jobs:
     - stage: "Test"
       name: "unit tests"
       script:
-        - cd $TRAVIS_BRANCH
-        - chmod +x build.sh
-        - ./build.sh test
-        - ./test
+        - docker build -t cpp --build-arg PROJECT=$TRAVIS_BRANCH .
+        - docker run -e TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER -e TRAVIS_BRANCH=$TRAVIS_BRANCH -e BINTRAY_API_KEY=$BINTRAY_API_KEY cpp test
+      if: |
+        (type = push)
     - stage: "Deploy"
       name: "deploy"
       script:
-        - cd $TRAVIS_BRANCH
-        - chmod +x build.sh
-        - ./build.sh deb
-        - curl -T $TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -uf0m41h4u7:$BINTRAY_API_KEY "https://api.bintray.com/content/f0m41h4u7/cpp-hw/$TRAVIS_BRANCH/$TRAVIS_BUILD_NUMBER/$TRAVIS_BRANCH-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+        - docker run -e TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER -e TRAVIS_BRANCH=$TRAVIS_BRANCH -e BINTRAY_API_KEY=$BINTRAY_API_KEY cpp deb
+      if: |
+        (type = push)

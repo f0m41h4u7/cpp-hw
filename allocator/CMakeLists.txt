@@ -14,10 +14,17 @@ set_target_properties(allocator PROPERTIES
 target_include_directories(allocator
     PRIVATE "${CMAKE_BINARY_DIR}"
 )
+
 set_target_properties(test PROPERTIES
+    CXX_STANDARD 17
+    CXX_STANDARD_REQUIRED ON
     COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
     INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
 )
+target_include_directories(test
+    PRIVATE "${CMAKE_BINARY_DIR}"
+)
+
 target_link_libraries(test
     ${Boost_LIBRARIES}
 )
