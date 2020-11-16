@@ -14,5 +14,6 @@ if [[ $build == deb ]]; then
   cmake --build $(pwd)
   cmake --build $(pwd) --target package
 elif [[ $build == test ]]; then
-  exit 0
+  cmake --build $(pwd)
+  cmake --build $(pwd) --target test
 fi
