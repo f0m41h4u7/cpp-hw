@@ -2,7 +2,7 @@
 
 build=$1
 
-build_number=$(echo $TRAVIS_BUILD_NUMBER)
+build_number=$TRAVIS_BUILD_NUMBER
 
 if [[ -z $build_number ]]; then
   build_number=1
