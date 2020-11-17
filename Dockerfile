@@ -1,10 +1,11 @@
-FROM alpine:edge
+FROM gcc:10.2.0
 
 ARG PROJECT
 
 WORKDIR /app
 
-RUN apk update && apk upgrade && apk add --no-cache build-base curl bash gcc g++ make cmake boost-dev 
+RUN apt-get update && apt-get -y upgrade && apt-get install -y curl bash make cmake libboost-test-dev \
+    && echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | tee -a /etc/apt/sources.list
 
 ADD ./$PROJECT .
 
