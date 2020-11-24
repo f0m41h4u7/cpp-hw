@@ -27,7 +27,7 @@ jobs:
         skip_cleanup: true
         github_token: $GITHUB_TOKEN
         keep_history: false
-        local_dir: html
+        local_dir: print_ip/html
         on:
           branch: print_ip
       if: |
