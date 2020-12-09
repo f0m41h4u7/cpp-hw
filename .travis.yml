@@ -2,6 +2,7 @@ language: cpp
 
 install:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then travis_terminate 0; fi
+- if [ "$TRAVIS_BRANCH" == *"review"* ]; then travis_terminate 0; fi
 
 stages:
   - name: Test
@@ -15,7 +16,7 @@ jobs:
         - docker build -t cpp --build-arg PROJECT=$TRAVIS_BRANCH .
         - docker run -e TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER cpp test
       if: |
-        (type = push)
+        (type = push AND branch != editor)
     - stage: "Deploy"
       name: "deploy"
       script:
@@ -27,8 +28,6 @@ jobs:
         skip_cleanup: true
         github_token: $GITHUB_TOKEN
         keep_history: false
-        local_dir: print_ip/html
-        on:
-          branch: print_ip
+        local_dir: $TRAVIS_BRANCH/html
       if: |
         (type = push)
