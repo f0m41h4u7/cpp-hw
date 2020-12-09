@@ -1,17 +1,17 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(print_ip VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+project(allocator VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
-add_executable(print_ip main.cpp)
+add_executable(allocator main.cpp)
 add_executable(test test.cpp)
 
-set_target_properties(print_ip PROPERTIES
+set_target_properties(allocator PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
 )
-target_include_directories(print_ip
+target_include_directories(allocator
     PRIVATE "${CMAKE_BINARY_DIR}"
 )
 
@@ -30,14 +30,14 @@ target_link_libraries(test
 )
 
 if (MSVC)
-    target_compile_options(print_ip PRIVATE
+    target_compile_options(allocator PRIVATE
         /W4
     )
     target_compile_options(test PRIVATE
         /W4
     )
 else ()
-    target_compile_options(print_ip PRIVATE
+    target_compile_options(allocator PRIVATE
         -Wall -Wextra -pedantic 
     )
     target_compile_options(test PRIVATE
@@ -45,7 +45,7 @@ else ()
     )
 endif()
 
-install(TARGETS print_ip RUNTIME DESTINATION bin)
+install(TARGETS allocator RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 

@@ -14,7 +14,6 @@ TRAVIS_BUILD_NUMBER=$build_number cmake $(pwd)
 if [[ $build == deb ]]; then
   cmake --build $(pwd)
   cmake --build $(pwd) --target package
-  doxygen ./Doxyfile
 elif [[ $build == test ]]; then
   cmake --build $(pwd)
   cmake --build $(pwd) --target test
