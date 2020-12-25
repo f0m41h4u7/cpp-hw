@@ -5,3 +5,4 @@ Otus C++ homeworks
 1) [«IP filter»](./ip_filter)
 2) [«Allocator»](./allocator)
 3) [«Print IP»](./print_ip)
+4) [«Editor»](./editor)
