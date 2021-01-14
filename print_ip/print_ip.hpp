@@ -68,6 +68,7 @@ void print_ip(const T& ip)
 template < typename T, is_string<T> = true >
 void print_ip(const T& ip)
 {
+  std::cout << __PRETTY_FUNCTION__ << "\n";
   std::cout << ip;
 }
 
@@ -78,6 +79,7 @@ void print_ip(const T& ip)
 template < typename T, is_container<T> = true >
 void print_ip(const T& ip)
 {
+  std::cout << __PRETTY_FUNCTION__ << "\n";
   for(auto it = ip.begin(); it != ip.end();)
   {
     std::cout << +(to_unsigned(*it));

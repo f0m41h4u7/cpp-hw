@@ -19,14 +19,15 @@ int main()
   print_ip<long>(8875824491850138409);
   std::cout << "\n";
 
-  print_ip("43.98.123.7"s);
+  const std::string tmp = "43.98.123.7";
+  print_ip(tmp);
   std::cout << "\n";
 
-  std::vector<int> ip_vec{98, 32, 124, 78};
+  const std::vector<int> ip_vec{98, 32, 124, 78};
   print_ip(ip_vec);
   std::cout << "\n";
 
-  std::list<int> ip_list{88, 213, 121, 123};
+  const std::list<int> ip_list{88, 213, 121, 123};
   print_ip(ip_list);
 
   return 0;
