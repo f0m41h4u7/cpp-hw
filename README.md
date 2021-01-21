@@ -7,3 +7,4 @@ Otus C++ homeworks
 3) [«Print IP»](./print_ip)
 4) [«Editor»](./editor)
 5) [«Matrix»](./matrix)
+6) [«Bulk»](./bulk)
