@@ -39,11 +39,6 @@ target_link_libraries(main PRIVATE
   async
 )
 
-install(TARGETS async
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
-
 if (MSVC)
   target_compile_options(async PRIVATE
     /W4
@@ -56,11 +51,13 @@ else ()
     -Wall -Wextra -pedantic -Wl,--no-as-needed -lpthread
   )
   target_compile_options(main PRIVATE
-    -Wall -Wextra -pedantic -Wl,--no-as-needed -lpthrea
+    -Wall -Wextra -pedantic -Wl,--no-as-needed -lpthread
   )
 endif()
 
-install(TARGETS async
+include(GNUInstallDirs)
+install(
+  TARGETS async
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
