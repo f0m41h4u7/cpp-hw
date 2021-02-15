@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.9)
 
 project(async VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
@@ -39,8 +39,6 @@ target_link_libraries(main PRIVATE
   async
 )
 
-include(GNUInstallDirs)
-
 install(TARGETS async
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
@@ -62,7 +60,12 @@ else ()
   )
 endif()
 
-install(TARGETS async RUNTIME DESTINATION bin)
+install(TARGETS async
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+
+install(TARGETS main RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 
