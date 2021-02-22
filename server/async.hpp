@@ -31,7 +31,6 @@ namespace async_blk
         std::size_t n = co_await socket.async_read_some(bufs, use_awaitable);
         b.commit(n);
         h->handle(&b);
-        //co_await async_write(socket, boost::asio::buffer(data, n), use_awaitable);
       }
     }
     catch (std::exception& e)
@@ -56,7 +55,6 @@ namespace async_blk
     try
     {
       auto h = std::make_shared<Handler>(bulk, port);
-      //Handler h{bulk, port};
       
       boost::asio::io_context ctx;
       boost::asio::signal_set signals(ctx, SIGINT, SIGTERM);
