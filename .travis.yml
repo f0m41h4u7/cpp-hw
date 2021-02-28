@@ -16,7 +16,7 @@ jobs:
         - docker build -t cpp --build-arg PROJECT=$TRAVIS_BRANCH .
         - docker run -e TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER cpp test
       if: |
-        (type = push AND branch != editor AND branch != async)
+        (type = push AND branch != editor AND branch != async AND branch != server AND branch != join_server)
     - stage: "Deploy"
       name: "deploy"
       script:
