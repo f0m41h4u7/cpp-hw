@@ -24,10 +24,9 @@ namespace async_blk
       th.join();
   }
   
-  void Handler::handle(boost::asio::streambuf* b)
+  void Handler::handle(std::string_view sv)
   {
-    //std::istringstream input(str.data());
-    std::istream input(b);
+    std::stringstream input(sv.data());
     std::string line;
     std::unique_lock<std::mutex> lock(m_mutex);
     lock.unlock();

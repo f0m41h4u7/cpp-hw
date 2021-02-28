@@ -39,14 +39,14 @@ namespace async_blk
     bool m_done{false};
   }; 
   
-  class Handler //: public std::enable_shared_from_this<Handler>
+  class Handler
   {
   public:
     Handler(std::size_t, short unsigned int);
     ~Handler();
     
     void stop();
-    void handle(boost::asio::streambuf*);
+    void handle(std::string_view);
       
   private:
     void write();
