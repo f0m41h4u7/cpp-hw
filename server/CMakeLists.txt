@@ -29,7 +29,7 @@ target_include_directories(server
   PRIVATE "${CMAKE_BINARY_DIR}"
 )
 
-target_link_libraries(async
+target_link_libraries(server
 	${CMAKE_THREAD_LIBS_INIT} boost_system pthread
 )
 
