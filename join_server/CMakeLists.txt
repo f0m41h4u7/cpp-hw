@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(join_server VERSION 0.0.1)
+project(join_server VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 find_package(Boost 1.54.0 REQUIRED system)
 find_package(pegtl)
