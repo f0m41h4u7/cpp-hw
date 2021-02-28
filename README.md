@@ -8,3 +8,4 @@ Otus C++ homeworks
 4) [«Editor»](./editor)
 5) [«Matrix»](./matrix)
 6) [«Bulk»](./bulk)
+8) [«Async»](./async)
