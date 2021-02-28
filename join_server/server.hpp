@@ -4,7 +4,6 @@
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/shared_ptr.hpp>
 #include <functional>
-#include <iostream>
 #include <string_view>
 
 #define MAX_PACKET_SIZE 4096
