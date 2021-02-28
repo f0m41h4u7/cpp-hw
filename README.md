@@ -9,3 +9,5 @@ Otus C++ homeworks
 5) [«Matrix»](./matrix)
 6) [«Bulk»](./bulk)
 8) [«Async»](./async)
+9) [«Server»](./async)
+10) [«Outer join»](./join_server)
