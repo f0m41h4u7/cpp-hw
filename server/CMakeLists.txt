@@ -40,7 +40,7 @@ target_link_libraries(main PRIVATE
   async
 )
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2a -lboost_coroutine -fcoroutines")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2a")
 
 if (MSVC)
   target_compile_options(async PRIVATE
