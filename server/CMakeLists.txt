@@ -41,21 +41,19 @@ target_link_libraries(server PRIVATE
   async
 )
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2a")
-
 if (MSVC)
-  target_compile_options(server PRIVATE
-    /W4
-  )
   target_compile_options(async PRIVATE
     /W4
   )
-else ()
   target_compile_options(server PRIVATE
-    -Wall -Wextra -pedantic -Wl,--no-as-needed -lpthread
+    /W4
   )
-  target_compile_options(asyncPRIVATE
-    -Wall -Wextra -pedantic -Wl,--no-as-needed -lpthread
+else ()
+  target_compile_options(async PRIVATE
+    -Wall -Wextra -pedantic -lpthread
+  )
+  target_compile_options(server PRIVATE
+    -Wall -Wextra -pedantic -lpthread
   )
 endif()
 
