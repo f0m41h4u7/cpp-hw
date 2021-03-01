@@ -15,6 +15,6 @@ if [[ $build == deb ]]; then
   cmake $(pwd)
   make async
   make install
-  make main
+  make server
   make package
 fi

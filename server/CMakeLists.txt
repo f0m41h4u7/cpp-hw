@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
 
-project(async VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+project(server VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 find_package(Threads REQUIRED)
 find_package(Boost 1.54.0 REQUIRED system)
@@ -9,9 +9,10 @@ add_library(async SHARED
   async.hpp
   handler.cpp
   handler.hpp
+  server.hpp
 )
 
-add_executable(main main.cpp)
+add_executable(server main.cpp)
 
 set_target_properties(async PROPERTIES
   CXX_STANDARD 20
@@ -19,7 +20,7 @@ set_target_properties(async PROPERTIES
   PUBLIC_HEADER async.hpp
 )
 
-set_target_properties(main PROPERTIES
+set_target_properties(server PROPERTIES
   CXX_STANDARD 20
   CXX_STANDARD_REQUIRED ON
 )
@@ -32,29 +33,27 @@ target_link_libraries(async
 	${CMAKE_THREAD_LIBS_INIT} boost_system pthread
 )
 
-target_include_directories(main
+target_include_directories(server
   PRIVATE "${CMAKE_BINARY_DIR}"
 )
 
-target_link_libraries(main PRIVATE
+target_link_libraries(server PRIVATE
   async
 )
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2a -lboost_coroutine -fcoroutines")
 
 if (MSVC)
   target_compile_options(async PRIVATE
     /W4
   )
-  target_compile_options(main PRIVATE
+  target_compile_options(server PRIVATE
     /W4
   )
 else ()
   target_compile_options(async PRIVATE
-    -Wall -Wextra -pedantic -Wl,--no-as-needed -lpthread
+    -Wall -Wextra -pedantic -lpthread
   )
-  target_compile_options(main PRIVATE
-    -Wall -Wextra -pedantic -Wl,--no-as-needed -lpthread
+  target_compile_options(server PRIVATE
+    -Wall -Wextra -pedantic -lpthread
   )
 endif()
 
@@ -65,7 +64,7 @@ install(
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
-install(TARGETS main RUNTIME DESTINATION bin)
+install(TARGETS server RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 
