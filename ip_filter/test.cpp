@@ -38,8 +38,6 @@ BOOST_AUTO_TEST_CASE(test_reverse_sort)
 
 BOOST_AUTO_TEST_CASE(test_print_match)
 {
-  using namespace std::literals;
-
   IP_filter f;
   int res;
 
