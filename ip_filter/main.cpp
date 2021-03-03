@@ -4,8 +4,6 @@
 
 int main()
 {
-  using namespace std::literals;
-
   std::string read_line;
   IP_filter f;
 
