@@ -1,1 +1,0 @@
-/usr/bin/c++ -rdynamic -llapacke -llapack -lblas -lrt -lm -lpthread -Wl,--copy-dt-needed-entries CMakeFiles/kkmeans.dir/main.cpp.o -o kkmeans  -lopenblas -ldlib 

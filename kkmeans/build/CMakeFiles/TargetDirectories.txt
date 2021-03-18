@@ -1,9 +1,0 @@
-/home/f0m41h4u7/workspace/cpp-hw/kkmeans/build/CMakeFiles/install/strip.dir
-/home/f0m41h4u7/workspace/cpp-hw/kkmeans/build/CMakeFiles/install/local.dir
-/home/f0m41h4u7/workspace/cpp-hw/kkmeans/build/CMakeFiles/edit_cache.dir
-/home/f0m41h4u7/workspace/cpp-hw/kkmeans/build/CMakeFiles/install.dir
-/home/f0m41h4u7/workspace/cpp-hw/kkmeans/build/CMakeFiles/list_install_components.dir
-/home/f0m41h4u7/workspace/cpp-hw/kkmeans/build/CMakeFiles/rebuild_cache.dir
-/home/f0m41h4u7/workspace/cpp-hw/kkmeans/build/CMakeFiles/package.dir
-/home/f0m41h4u7/workspace/cpp-hw/kkmeans/build/CMakeFiles/package_source.dir
-/home/f0m41h4u7/workspace/cpp-hw/kkmeans/build/CMakeFiles/kkmeans.dir
