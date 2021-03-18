@@ -19,8 +19,8 @@ int main(int argc, char** argv)
 
     unsigned int n = std::stoi(argv[1]);
 
-    typedef dlib::matrix<float,2,1> sample_type;
-    typedef dlib::radial_basis_kernel<sample_type> kernel_type;
+    using sample_type = dlib::matrix<float,2,1> ;
+    using kernel_type = dlib::radial_basis_kernel<sample_type>;
 
     dlib::kcentroid<kernel_type> kc(kernel_type(0.1),0.01, 8);
     dlib::kkmeans<kernel_type> instance(kc);

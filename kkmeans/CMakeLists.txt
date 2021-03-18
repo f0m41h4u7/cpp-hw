@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(kkmeans VERSION 0.0.1)
+project(kkmeans VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 find_package(dlib REQUIRED)
 find_package(OpenBLAS REQUIRED)
