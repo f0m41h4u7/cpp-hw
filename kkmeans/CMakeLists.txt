@@ -17,7 +17,7 @@ target_include_directories(kkmeans
 
 target_link_libraries(kkmeans ${CMAKE_THREAD_LIBS_INIT} openblas dlib)
 
-target_link_options(kkmeans PRIVATE -llapacke -llapack -lblas -lrt -lm -lpthread -Wl,--copy-dt-needed-entries)
+target_link_options(kkmeans PRIVATE -lblas -lrt -lm -lpthread -Wl,--copy-dt-needed-entries)
 
 if (MSVC)
   target_compile_options(kkmeans PRIVATE
