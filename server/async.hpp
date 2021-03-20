@@ -9,7 +9,7 @@ namespace async_blk
   {
     try
     {
-      boost::shared_ptr<Handler> h(new Handler(bulk, port));
+      std::shared_ptr<Handler> h(new Handler(bulk, port));
       
       boost::asio::io_service svc;
       nett::server server(port, svc, h);
