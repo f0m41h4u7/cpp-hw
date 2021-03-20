@@ -1,8 +1,6 @@
 #pragma once
 
 #include <boost/asio.hpp>
-#include <boost/enable_shared_from_this.hpp>
-#include <boost/shared_ptr.hpp>
 #include <string_view>
 
 #include "handler.hpp"
@@ -13,12 +11,12 @@ namespace nett
 {
   using boost::asio::ip::tcp;
   
-  class connection : public boost::enable_shared_from_this<connection>
+  class connection : public std::enable_shared_from_this<connection>
   {
   public:
-    using pointer = boost::shared_ptr<connection>;
+    using pointer = std::shared_ptr<connection>;
 
-    static pointer create(tcp::socket socket, boost::shared_ptr<async_blk::Handler> h)
+    static pointer create(tcp::socket socket, std::shared_ptr<async_blk::Handler> h)
     {
       return pointer(new connection(std::move(socket), std::move(h)));
     }
@@ -28,7 +26,7 @@ namespace nett
     void receive() { read(); }
 
   private:
-    connection(tcp::socket socket, boost::shared_ptr<async_blk::Handler> h)
+    connection(tcp::socket socket, std::shared_ptr<async_blk::Handler> h)
     : m_socket(std::move(socket)),
       m_handler(h)
     {}
@@ -49,13 +47,13 @@ namespace nett
 
     tcp::socket                           m_socket;
     char                                  m_data[MAX_PACKET_SIZE];
-    boost::shared_ptr<async_blk::Handler> m_handler;
+    std::shared_ptr<async_blk::Handler> m_handler;
   };
     
   class server
   {
   public:
-    server(short unsigned int port, boost::asio::io_service& svc, boost::shared_ptr<async_blk::Handler> handler)
+    server(short unsigned int port, boost::asio::io_service& svc, std::shared_ptr<async_blk::Handler> handler)
     : m_acceptor(svc, tcp::endpoint(tcp::v4(), port)),
       m_handler(handler)
     {
@@ -82,6 +80,6 @@ namespace nett
   private:
     boost::asio::io_service               m_svc;
     tcp::acceptor                         m_acceptor;
-    boost::shared_ptr<async_blk::Handler> m_handler;
+    std::shared_ptr<async_blk::Handler> m_handler;
   };
 } // namespace nett;

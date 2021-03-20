@@ -1,8 +1,6 @@
 #pragma once
 
 #include <boost/asio.hpp>
-#include <boost/enable_shared_from_this.hpp>
-#include <boost/shared_ptr.hpp>
 #include <functional>
 #include <string_view>
 
@@ -14,10 +12,10 @@ namespace nett
   
   using handler_t = std::function<std::string(std::string_view)>;
   
-  class connection : public boost::enable_shared_from_this<connection>
+  class connection : public std::enable_shared_from_this<connection>
   {
   public:
-    using pointer = boost::shared_ptr<connection>;
+    using pointer = std::shared_ptr<connection>;
 
     static pointer create(tcp::socket socket, handler_t h) { return pointer(new connection(std::move(socket), h)); }
     ~connection() = default;
