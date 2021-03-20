@@ -1,5 +1,7 @@
 # cpp-hw
-Otus C++ homeworks
+[![Build Status](https://travis-ci.com/f0m41h4u7/cpp-hw.svg?branch=master)](https://travis-ci.com/f0m41h4u7/cpp-hw) 
+
+### Otus C++ homeworks 
 
 0) [«Hello World»](./helloworld)
 1) [«IP filter»](./ip_filter)
