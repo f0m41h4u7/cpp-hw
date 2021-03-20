@@ -11,3 +11,4 @@ Otus C++ homeworks
 8) [«Async»](./async)
 9) [«Server»](./async)
 10) [«Outer join»](./join_server)
+11) [«Custerization and classification»](./realty)
